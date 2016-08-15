@@ -29,8 +29,6 @@ class CollectCommentsThread(QThread):
     about_new_text = pyqtSignal(str)
     about_progress = pyqtSignal(int)
     about_range_progress = pyqtSignal(int, int)
-    about_start = pyqtSignal()
-    about_finished = pyqtSignal()
 
     def __init__(self, user=None, url=None):
         super().__init__()
@@ -38,14 +36,10 @@ class CollectCommentsThread(QThread):
         self.user = user
         self.url = url
 
-        self.started.connect(self.about_start)
-        self.finished.connect(self.about_finished)
-
         self._is_run = False
 
     def run(self):
         print('Start thread.')
-        self.about_start.emit()
 
         try:
             collect_user_comments(
@@ -58,7 +52,6 @@ class CollectCommentsThread(QThread):
 
         finally:
             print('Finish thread.')
-            self.about_finished.emit()
 
     def start(self, priority=QThread.InheritPriority):
         self._is_run = True
@@ -110,8 +103,8 @@ class MainWindow(QWidget):
         self.thread.about_new_text.connect(self.log.append)
         self.thread.about_progress.connect(self.progress.setValue)
         self.thread.about_range_progress.connect(self.progress.setRange)
-        self.thread.about_start.connect(self._start)
-        self.thread.about_finished.connect(self._finished)
+        self.thread.started.connect(self._start)
+        self.thread.finished.connect(self._finished)
 
         self._update_states()
 
