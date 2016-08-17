@@ -6,6 +6,8 @@ __author__ = 'ipetrash'
 
 # TODO: сделать вебсервер
 # TODO: указывать страницу коммента
+# TODO: заменить handler_range_progress_func на handler_max_progress_func,
+# т.к. "range" в данной функции всегда начинается с 0
 def collect_user_comments(user, url_manga,
                           handler_log_func=print,
                           is_stop_func=None,
