@@ -75,10 +75,10 @@ class MainWindow(QWidget):
         layout = QVBoxLayout()
 
         self.nick_line_edit = QLineEdit()
-        self.nick_line_edit.setText('Rihoko7')
+        self.nick_line_edit.setText('gil9red')
 
         self.url_line_edit = QLineEdit()
-        self.url_line_edit.setText('http://mintmanga.com/tokyo_ghoul/vol1/1?mature=1')
+        self.url_line_edit.setText('https://mintmanga.live/tokiiskii_gul/vol1/1?mtr=true')
 
         self.start_stop_button = QPushButton()
         self.start_stop_button.clicked.connect(self.start_stop)

@@ -64,17 +64,17 @@ def collect_user_comments(user, url_manga,
             comments = list()
 
             # Сбор всех комментариев главы
-            for div in root.xpath('//*[@id="twitts"]/div/div'):
+            for div in root.xpath("//*[@id='twitts']//*[contains(@class, 'comm')]"):
                 a = div.xpath('a')
-                span = div.xpath('span')
+                mess = div.xpath('div[contains(@class, "mess")]')
 
-                # Возможны div без комментов внутри, поэтому проверяем наличие тегов a (логин) и span (текст)
-                if a and span:
+                # Возможны div без комментов внутри, поэтому проверяем наличие тегов a (логин) и mess (текст)
+                if a and mess:
                     a = a[0]
-                    span = span[0]
+                    mess = mess[0]
 
                     if a.text == user:
-                        comments.append((a.text, span.text))
+                        comments.append((a.text, mess.text))
 
             # Если список не пуст
             if comments:
@@ -93,6 +93,6 @@ def collect_user_comments(user, url_manga,
 
 
 if __name__ == '__main__':
-    user = 'Rihoko7'
-    url = 'http://mintmanga.com/tokyo_ghoul/vol1/1?mature=1'
+    user = 'gil9red'
+    url = 'https://mintmanga.live/tokiiskii_gul/vol1/1?mtr=1'
     collect_user_comments(user, url)
